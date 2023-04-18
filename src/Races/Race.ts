@@ -1,15 +1,15 @@
 export default abstract class Race {
-  constructor(private _name: string, private _dexterty: number) { }
+  constructor(private _name: string, private _dexterity: number) { }
 
   get name(): string {
     return this._name
   }
   
-  get dexterty(): number {
-    return this._dexterty
+  get dexterity(): number {
+    return this._dexterity
   }
 
-  static createRacesInstances(): number {
+  static createdRacesInstances(): number {
     throw new Error('Not implemented');
   }
   
