@@ -8,29 +8,24 @@ export default class Monster implements SimpleFighter {
     this._strength = 63;
   }
 
-  receiveDamage(attackPoints: number): number {
-    const damage = this._lifePoints - attackPoints;
+  get lifePoints(): number { return this._lifePoints; }
+  set setLifePoints(value: number) { this._lifePoints = value; }
+  get strength(): number { return this._strength; }
+
+  receiveDamage(attackPoints: number) {
+    const damage = attackPoints - this.lifePoints;
     if (damage > 0) {
       this._lifePoints -= damage;
-    }
-    if (damage <= 0) {
-      this._lifePoints -= 1;
-    }
-    if (this._lifePoints <= 0) {
+    } else { this._lifePoints -= 1; }
+    if (this._lifePoints === 0 || this._lifePoints < 0) {
       this._lifePoints = -1;
     }
-    return this._lifePoints;
+    return this.lifePoints;
   }
 
-  attack(enemy: SimpleFighter): void {
-    enemy.receiveDamage(this._strength);
-  }
-
-  get lifePoints(): number {
-    return this._lifePoints;
-  }
-
-  get strength(): number {
-    return this._strength;
+  attack(enemy: SimpleFighter) {
+    // return enemy.receiveDamage(this._strength);
+    this._lifePoints = this.lifePoints - enemy.strength;
+    return this.lifePoints;
   }
 }
